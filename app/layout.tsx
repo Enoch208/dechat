@@ -6,10 +6,7 @@ import UploadThingProvider from './providers/UploadThingProvider';
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
-import dynamic from 'next/dynamic';
-
-// Dynamically import the InstallPWA component to avoid SSR issues
-const InstallPWA = dynamic(() => import('./components/InstallPWA'), { ssr: false });
+import InstallPWAWrapper from './components/InstallPWAWrapper';
 
 export const metadata: Metadata = {
   title: "DeChat - Secure Phrase-Based Chat",
@@ -55,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               routerConfig={extractRouterConfig(ourFileRouter)}
             />
             {children}
-            <InstallPWA />
+            <InstallPWAWrapper />
           </UploadThingProvider>
         </AuthProvider>
       </body>
